@@ -121,7 +121,7 @@ const StudentListPage = () => {
             {/* list */}
             <Table columns={columns} renderRow={renderRow} data={studentsData}/>
             {/* pagination */}
-            <Pagination/>
+            <Pagination />
         </div>
     );
 }
