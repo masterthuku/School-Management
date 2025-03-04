@@ -29,7 +29,6 @@ const SubjectForm = ({
     resolver: zodResolver(subjectSchema),
   });
 
-  // AFTER REACT 19 IT'LL BE USEACTIONSTATE
 
   const [state, formAction] = useFormState(
     type === "create" ? createSubject : updateSubject,
@@ -54,7 +53,7 @@ const SubjectForm = ({
     }
   }, [state, router, type, setOpen]);
 
-  const { teachers } = relatedData;
+  const { teachers } = relatedData || { teachers: [] };
 
   return (
     <form className="flex flex-col gap-8" onSubmit={onSubmit}>
@@ -77,6 +76,7 @@ const SubjectForm = ({
             defaultValue={data?.id}
             register={register}
             error={errors?.id}
+            //@ts-ignore
             hidden
           />
         )}
@@ -88,13 +88,13 @@ const SubjectForm = ({
             {...register("teachers")}
             defaultValue={data?.teachers}
           >
-            {teachers.map(
+             {teachers.map(
               (teacher: { id: string; name: string; surname: string }) => (
                 <option value={teacher.id} key={teacher.id}>
                   {teacher.name + " " + teacher.surname}
                 </option>
               )
-            )}
+            )} 
           </select>
           {errors.teachers?.message && (
             <p className="text-xs text-red-400">

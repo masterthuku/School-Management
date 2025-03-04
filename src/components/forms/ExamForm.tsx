@@ -64,7 +64,7 @@ const ExamForm = ({
     }
   }, [state, router, type, setOpen]);
 
-  const { lessons } = relatedData;
+  const { lessons } = relatedData || { lessons: [] };
 
   return (
     <form className="flex flex-col gap-8" onSubmit={onSubmit}>
@@ -103,6 +103,7 @@ const ExamForm = ({
             defaultValue={data?.id}
             register={register}
             error={errors?.id}
+            // @ts-ignore
             hidden
           />
         )}
